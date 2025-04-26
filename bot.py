@@ -1,4 +1,3 @@
-
 import os
 import telebot
 import asyncio
@@ -25,6 +24,7 @@ queue = deque()
 cooldown = {}
 TOKENS_FILE = "tokens.json"
 
+# --- Cargar y guardar tokens ---
 def cargar_tokens():
     try:
         with open(TOKENS_FILE, "r") as f:
@@ -38,12 +38,14 @@ def guardar_tokens(data):
 
 user_tokens = cargar_tokens()
 
+# --- Comando para ver tokens ---
 @bot.message_handler(commands=['mistokens'])
 def handle_mistokens(message):
     uid = str(message.from_user.id)
     tokens = user_tokens.get(uid, 0)
     bot.reply_to(message, f"🔐 Tenés {tokens} tokens disponibles.")
 
+# --- Comando para agregar tokens (solo OWNER) ---
 @bot.message_handler(commands=['addtokens'])
 def handle_addtokens(message):
     if message.from_user.id != OWNER_ID:
@@ -98,16 +100,11 @@ def handle_dni(message):
         return
 
     respuesta = (
-        f"📄 Nombre: {data.get('nombres', 'N/A')} {data.get('apellido', 'N/A')}
-"
-        f"📆 Fecha de nacimiento: {data.get('fecha_nacimiento', 'N/A')}
-"
-        f"🔛 CUIL: {data.get('cuil', 'N/A')}
-"
-        f"🏠 Dirección: {data.get('calle', '')} {data.get('numero', '')}, {data.get('ciudad', '')}, {data.get('provincia', '')}
-"
-        f"📆 Emisión: {data.get('fecha_emision', 'N/A')} - Vencimiento: {data.get('fecha_vencimiento', 'N/A')}
-"
+        f"📄 Nombre: {data.get('nombres', 'N/A')} {data.get('apellido', 'N/A')}\n"
+        f"📆 Fecha de nacimiento: {data.get('fecha_nacimiento', 'N/A')}\n"
+        f"🔛 CUIL: {data.get('cuil', 'N/A')}\n"
+        f"🏠 Dirección: {data.get('calle', '')} {data.get('numero', '')}, {data.get('ciudad', '')}, {data.get('provincia', '')}\n"
+        f"📆 Emisión: {data.get('fecha_emision', 'N/A')} - Vencimiento: {data.get('fecha_vencimiento', 'N/A')}\n"
     )
     bot.reply_to(message, respuesta)
 
