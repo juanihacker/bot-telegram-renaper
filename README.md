@@ -1,0 +1,1 @@
+Este proyecto contiene un bot de Telegram con comandos /dni y sistema de tokens para usar en VPS. Revisá el README original para más info.

@@ -1,0 +1,5 @@
+telebot
+playwright
+python-dotenv
+aiohttp
+requests
