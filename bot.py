@@ -1,3 +1,4 @@
+
 import os
 import telebot
 import asyncio
@@ -123,4 +124,5 @@ def handle_start(message):
     bot.reply_to(message, "🤖 ¡Hola! Enviá /check o /dni para comenzar. Usá /mistokens para ver tus tokens disponibles.")
 
 if __name__ == "__main__":
+    print("✅ BOT INICIADO Y ESCUCHANDO...")
     bot.infinity_polling()
